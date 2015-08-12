@@ -1,0 +1,371 @@
+% caxetexFree.sty    version 0.1
+% Standard XeTeX style for academic papers, books,
+% slides, handouts, and CVs
+%
+% Chris Adolph     chrisadolph.com
+% January 2013
+% 
+% You will need the following FREE open typefaces:
+% 
+%   Linux Libertine (for text) 
+%   Adobe Source Sans (display and san serif) 
+%   Inconsolata (typewriter) 
+%   GFS Porson (Greek) 
+%   Museo Slab 500 (slab serif)
+%
+% The OTF files for each of the above font families
+% should be installed in the /Library/Fonts folder
+% in root.  Do not use subfolders (or if you do,
+% alter the below accordingly).
+%
+% Otherwise, use Latex code as usual, and compile
+% your document with pdfxetex.
+%
+% Commands to note:
+%
+%  \lnt{123} will set 123 in XXX (but only in text mode)
+%
+%  Use column type S for numeric columns in tables
+%  to get appropriately set numerals
+%
+%  Use \textsb{word} to set "word" in slab-serif
+% 
+%  \textsc{\caps{word}} will set "word" in letterspaced
+%  small caps
+%
+% Many packages are loaded below; these are packages I
+% routinely use.  You might not need them all, but some are
+% essentialy for XeTeX font management, so be careful when
+% removing or reordering them.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Load packages
+\usepackage{graphicx}
+\usepackage[longnamesfirst]{natbib}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[figuresright]{rotating}
+\usepackage{lscape}
+\usepackage{soul}
+\usepackage{bold-extra}
+\usepackage{siunitx}
+\usepackage [mapping=tex-text]{fontspec} 
+\usepackage{mathspec}
+\usepackage{xltxtra}
+\usepackage{realscripts}
+\usepackage{xcolor}
+\usepackage[titles]{tocloft}
+\usepackage[flushmargin,bottom,splitrule]{footmisc}
+
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage[overload]{textcase}
+\usepackage{type1cm}
+\usepackage{lettrine}
+\usepackage[protrusion=true,final]{microtype}
+\usepackage[hyphens]{url}
+\usepackage[xspace]{ellipsis}
+\usepackage{relsize}
+
+% Set up captions (san serif, small)
+\usepackage[font={sf,stretch=1.0},labelfont=bf,labelsep=period,singlelinecheck=false]{caption}
+% font small
+
+\usepackage{float}
+\restylefloat{figure} 
+
+\tolerance = 1000    % was 1500
+\parindent = 10 pt   % was 12 pt for book in Bembo, 20 pt for non-book
+\linespread{1.15}
+
+%% Fonts
+\fontspec[Path = /Library/Fonts,
+UprightFont = LinLibertine_R.otf,
+ItalicFont = LinLibertine_RI.otf,
+BoldFont = LinLibertine_RB.otf,
+BoldItalicFont = LinLibertine_RBI.otf
+]{Linux Libertine O}
+
+\fontspec[Path = /Library/Fonts,
+UprightFont = SourceSansPro-Regular.otf,
+ItalicFont = SourceSansPro-It.otf,
+BoldFont = SourceSansPro-Bold.otf,
+BoldItalicFont = SourceSansPro-BoldIt.otf
+]{Source Sans Pro}
+
+\fontspec[Path = /Library/Fonts,
+UprightFont = Museo_Slab_500.otf,
+ItalicFont = Museo_Slab_500italic.otf,
+BoldFont = Museo_Slab_500.otf,
+BoldItalicFont = Museo_Slab_500italic.otf
+]{Museo Slab 500}
+
+\fontspec[Path = /Library/Fonts,
+UprightFont = Inconsolata.otf,
+ItalicFont = Inconsolata.otf,
+BoldFont = Inconsolata.otf,
+BoldItalicFont = Inconsolata.otf
+]{Inconsolata}
+
+\setmainfont[Ligatures=TeX, Numbers=OldStyle, WordSpace=0.95]{Linux Libertine O}
+
+\setsansfont[Ligatures=TeX, Scale=MatchLowercase]{Source Sans Pro}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
+
+
+\newfontfamily{\slabfont}[Ligatures=TeX, Scale=MatchLowercase]{Museo Slab 500}
+\fontsize{11}{12}\slabfont
+\newcommand\textsb[1]{{\slabfont #1}}
+
+\setmathsfont[Numbers={Monospaced,Lining}]{Linux Libertine O}
+\setmathsfont(Digits)[Numbers={Monospaced,Lining}]{Linux Libertine O}
+\AtBeginDocument{\setmathsfont(Digits)[Numbers={Monospaced,Lining}]{Linux
+    Libertine O}}
+\setmathsfont(Latin)[Scale=MatchLowercase]{Linux Libertine O}
+\setmathsfont(Greek)[Scale=MatchLowercase]{GFS Porson}
+
+\AtBeginDocument{\setmainfont[Ligatures=TeX, Numbers=OldStyle, WordSpace=0.95]{Linux Libertine O}}
+
+% Use lining numbers in text
+\newcommand{\lnt}[1]%
+           {{\addfontfeatures{Numbers={Monospaced,Lining}}#1}}
+
+% Use lining numbers in math
+\newcommand{\lnm}[1]%
+           {\textrm{\addfontfeatures{Numbers={Monospaced,Lining}}#1}}
+
+
+%%  "Look and feel" formating
+
+% Gray line in header
+\def\headrule{{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+\vskip 0.2em \color{gray}\hrule\@height\headrulewidth\@width\headwidth \color{black} \vskip-\headrulewidth}}
+
+\let\oldpagefootnoterule\pagefootnoterule
+\renewcommand{\pagefootnoterule}{\color{gray}\oldpagefootnoterule\color{black}}
+
+\renewcommand{\pagefootnoterule}{%
+\color{gray}
+\kern -3pt % call this kerna
+\hrule height 1pt width 0.0\columnwidth  % was 0.4\columnwidth
+\kern 3.0pt % call this kernb
+\color{black}
+}
+
+\let\oldsplitfootnoterule\splitfootnoterule
+\renewcommand{\splitfootnoterule}{\color{gray}\oldsplitfootnoterule\color{black}}
+
+\renewcommand{\splitfootnoterule}{%
+\color{gray}
+\kern -3pt % call this kerna
+\hrule height 1pt width 0.4\columnwidth  % was 1.0 columnwidth
+\kern 3.0pt % call this kernb
+\color{black}
+}
+
+% San-serif headings
+\def\@part[#1]#2{
+  \ifnum \c@secnumdepth >\m@ne 
+     \refstepcounter{part}
+     \addcontentsline{toc}{part}{\thepart \hspace{1em}#1}
+  \else
+     \addcontentsline{toc}{part}{#1}
+  \fi 
+  { 
+    \thispagestyle{empty}
+    \begin{center}
+      \lineskip 3em
+      \parindent 0pt 
+      \ifnum \c@secnumdepth >\m@ne 
+         \Large \bf\sf Part \thepart \par\nobreak 
+      \fi 
+      \vskip 3em
+      \huge \bf\sf #2\markboth{}{}\par 
+    \end{center}
+  } 
+  \nobreak 
+  \vskip 3ex 
+  \@afterheading 
+}
+
+\newcommand{\blockline}{\noindent\hspace{-1.565in}% <--- note the %
+  \color{gray}{\rule{1.5in}{1.5pt}}\color{black}}
+
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#1}%
+                       \else
+                         \addcontentsline{toc}{chapter}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+
+\def\@makechapterhead#1{%
+ \vspace{1.25in}
+ \hspace{0.15in}\begin{minipage}[t]{4in}
+  {\ifnum \c@secnumdepth >\m@ne
+   {\fontsize{37}{42}\rm \thechapter}}\par
+   \vspace{0.4in} \fi
+   \begin{spacing}{0.8}\noindent{\raggedright\huge\textsc{\caps{#1}}\par}\end{spacing}
+   \vspace{0.4in}
+   \end{minipage}
+ }
+
+\def\@makeschapterhead#1{%
+  \vspace{1.25in}
+  \hspace{0.15in}\begin{minipage}[t]{4in}
+  {{\fontsize{37}{42}\rm }}\par
+   \vspace{0.4in} 
+   \begin{spacing}{0.8}\noindent{\raggedright\huge\textsc{\caps{#1}}\par}\end{spacing}
+   \vspace{0.4in}
+   \end{minipage}
+  }
+
+
+\def\@makeschapterhead#1{%
+  \vspace*{16\p@}%
+  {\parindent \z@ \center
+    \Large  \sc
+    #1\par
+    \nobreak
+    \vskip 15\p@
+  }}
+
+
+\def\section{\@startsection {section}{1}{\z@}{-4.0ex plus-1ex minus
+    -.2ex}{1.8ex plus.2ex}{\reset@font\large\sf}}
+
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.50ex plus-1ex
+    minus-.2ex}{1.25ex plus.2ex}{\reset@font\sf}}
+
+\def\subsubsection{\@startsection{subsubsection}{2}{\z@}{-3.40ex plus-1ex
+    minus-.2ex}{0.80ex plus.2ex}{\reset@font\large\sf}}
+
+
+% Format title page
+\def\@maketitle{\newpage
+ \null
+ \vskip 6em
+ \begin{center}%
+  {\Large \sf \@title \par}%
+  \vskip 2.5em
+  {\large
+   \lineskip .5em
+   \begin{tabular}[t]{c}{\sf \@author}
+   \end{tabular}\par}%
+  \vskip 1em
+  {\large \textsf{\@date}}%
+ \end{center}%
+ \par
+ \vskip 2.5em}
+
+% Abstracts
+\def\abstract{\if@twocolumn
+\section*{\abstractname}%
+\else \small
+\begin{center}%
+{\large \bf \sf \abstractname\vspace{-.5em}\vspace{\z@}}%
+\end{center}%
+\quotation
+\fi}
+
+% Small footnotes and captions
+\newcommand{\oldfootnotesize}{\footnotesize}
+\renewcommand{\footnotesize}{\small}
+
+% fix an error in superscripts
+\makeatletter
+\renewcommand{\@makefnmark}{\mbox{\footnotemarkfont\textsuperscript*{\@thefnmark}}}
+\makeatother
+
+% Bringhurst footnote numbers at foot
+\makeatletter
+  \renewcommand\@makefntext[1]{%
+  \hspace*{-2.1em}   % was -2.1 em
+  \parindent 0em
+  \noindent
+  \hb@xt@ 1.8em{\hss %  There's the option of putting \hss before
+  \@thefnmark\,\,}%       or after \@thefnmark, aligning the footnote
+  #1}%                  marks to the right or to the left, respectively
+\makeatother
+
+
+% Set up dcolumn package for tables
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+% Manage floats
+\renewcommand{\topfraction}{0.9}        % 90% of page top can be a float
+\renewcommand{\bottomfraction}{0.9}     % 90% of page bottom can be a float
+\renewcommand{\textfraction}{0.07}       % only 7% of page must to be
+                                % text
+
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}     % 2 may work better
+%   Parameters for FLOAT pages (not text pages):
+\renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+% N.B.: floatpagefraction MUST be less than topfraction !!
+\renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+% Allow ragged right in tables
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+
+% Set up siunitx table columns for statistics
+\sisetup{
+        detect-mode,
+        tight-spacing           = true,
+        group-digits            = false,
+        input-signs             = ,
+        input-symbols           = ,
+        input-open-uncertainty  = ,
+        input-close-uncertainty = ,
+        table-align-text-pre    = false,
+        table-space-text-pre    = (,
+        table-space-text-post   = ),
+        }
+
+% Line and flow issues
+\hfuzz2pt 
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\setlinespacing}[1]%
+           {\setlength{\baselineskip}{#1 \defbaselineskip}}
+
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Add some space before footnotes
+
+\addtolength{\skip\footins}{1pt}  %
+\addtolength{\footnotesep}{1pt}
+
+\usepackage{placeins}
+
+\renewcommand{\caps}[1]%
+           {{\addfontfeature{LetterSpace=8, WordSpace=1.3} #1}}
+
+\frenchspacing
+
+\endinput

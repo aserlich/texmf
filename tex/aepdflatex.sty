@@ -1,0 +1,76 @@
+% Standard PdfLate style for academic papers I may change to XeTeX later
+% 
+% Aaron Erlich adapted from Chris Adolph
+% July 2012
+
+
+
+\usepackage{amsmath,amssymb}  %% these packages load various math symbols
+\usepackage{amsbsy}
+\usepackage{amsthm}
+%\usepackage{fullpage}  %% this package pushes the margins out
+\usepackage{graphicx}  %% this package allows you to include graphics
+\usepackage{natbib}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{soul}
+\usepackage{bold-extra}
+\usepackage{siunitx}
+% \usepackage[Mapping=tex-text]{fontspec} %for xetex
+%\usepackage{mathspec} %for xetex
+\usepackage{xltxtra}
+% \usepackage{realscripts} C Adolph file. I don't know what it does
+\usepackage{xcolor}
+\usepackage[titles]{tocloft}
+\usepackage[flushmargin,bottom,splitrule]{footmisc}
+\usepackage[retainorgcmds]{IEEEtrantools}
+%\usepackage{hyperref} %% allows for hyperreferences
+
+\usepackage{float}
+\usepackage{setspace}
+\doublespacing
+
+
+% Set up captions (san serif, small, slightly pinched lines)
+\usepackage[font={small,sf,stretch=0.85},labelsep=period,singlelinecheck=false]{caption}
+
+%set up bibliography
+%\newcommand{\BibTeX}{{\sc Bib}\TeX}
+%\bibpunct{(}{)}{;}{a}{}{,}
+
+% Set up dcolumn package for tables
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+% Manage floats
+\renewcommand{\topfraction}{0.9}        % 90% of page top can be a float
+\renewcommand{\bottomfraction}{0.9}     % 90% of page bottom can be a float
+\renewcommand{\textfraction}{0.07}       % only 7% of page must to be
+                                % text
+
+% Allow ragged right in tables
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+
+% % Set up siunitx table columns for statistics
+% \sisetup{
+%         detect-mode,
+%         tight-spacing           = true,
+%         group-digits            = false,
+%         input-signs             = ,
+%         input-symbols           = ,
+%         input-open-uncertainty  = ,
+%         input-close-uncertainty = ,
+%         table-align-text-pre    = false,
+%         table-space-text-pre    = (,
+%         table-space-text-post   = ),
+%         }
+
+\endinput
